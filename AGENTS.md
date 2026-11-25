@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Application structure
+- Keep the campaign as one scrolling index page with internal section anchors because the brief explicitly requests in-page navigation.
+- Keep podcast configuration and URL validation in the browser-safe podcast module, with a separate player component; unavailable or invalid sources must never activate playback.
+- Store app photography through asset pointer imports and keep visual tokens and responsive layouts in the global stylesheet for consistent presentation.
