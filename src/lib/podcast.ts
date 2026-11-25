@@ -1,8 +1,9 @@
 export type EpisodeSource = { kind: "mp3"; url: string } | { kind: "spotify"; url: string };
 
-// Supply an MP3 URL or the public Spotify episode URL when the recording is ready.
-export const episode: { source: EpisodeSource | null; transcript: string | null } = {
-  source: null,
+export const episode: { show: string; title: string; source: EpisodeSource | null; transcript: string | null } = {
+  show: "Rueda Caminos y Sonidos",
+  title: "Rodada Mija Go",
+  source: { kind: "spotify", url: "https://open.spotify.com/episode/17IpvTUedeuh1YUWIsqEIE?si=EO4y8nSnTBuLxv2J8gBG-g" },
   transcript: null,
 };
 

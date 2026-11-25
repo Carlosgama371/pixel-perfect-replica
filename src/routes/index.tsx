@@ -3,9 +3,8 @@ import { useState } from "react";
 import { ArrowDown, ArrowRight, Bike, ChevronLeft, ChevronRight, CircleStop, CloudRain, Compass, DoorOpen, Eye, Headphones, Lightbulb, MapPin, MoveUpRight, Route as RouteIcon, ShieldCheck, Smartphone, TrafficCone, Truck, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PodcastPlayer } from "@/components/podcast-player";
-import ciclorruta from "@/assets/ciclorruta.asset.json";
-import giro from "@/assets/giro.asset.json";
-import semaforo from "@/assets/semaforo.asset.json";
+import { episode } from "@/lib/podcast";
+import fotosRodada from "@/assets/rodada-mija-go.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [
@@ -20,9 +19,9 @@ export const Route = createFileRoute("/")({
 });
 
 const photos = [
-  { src: ciclorruta.url, alt: "Una persona con casco abrochado circula por una ciclorruta separada del tráfico de Bogotá." },
-  { src: giro.url, alt: "Una ciclista con casco comprueba el tráfico detrás de ella y extiende el brazo izquierdo para señalizar un giro." },
-  { src: semaforo.url, alt: "Una ciclista espera ante un semáforo en rojo con luces blanca y roja encendidas, dejando distancia respecto al carro que tiene delante." },
+  { src: fotosRodada.ciclorruta, alt: "Una ciclista con casco y camiseta amarilla circula por una ciclorruta separada del tráfico de Bogotá." },
+  { src: fotosRodada.giro, alt: "Una ciclista con casco comprueba el tráfico detrás de ella y extiende el brazo izquierdo para señalizar un giro." },
+  { src: fotosRodada.semaforo, alt: "Una ciclista espera ante un semáforo en rojo y deja espacio detrás del carro que tiene delante." },
 ];
 const groups = [
   { name: "Antes de salir", icon: Compass, tips: [
@@ -75,8 +74,8 @@ function Index() {
           <div className="space-y-9">{groups.map(group => <div key={group.name}><h3 className="group-title"><group.icon size={20} className="text-highlight" />{group.name}</h3><div className="tip-grid">{group.tips.map(tip => <article key={tip.title} className="tip-card"><tip.icon className="tip-icon" aria-hidden="true" /><h3>{tip.title}</h3><p>{tip.text}</p></article>)}</div></div>)}</div>
         </section>
         <section id="podcast" className="podcast-section" aria-labelledby="podcast-title"><div className="page-width podcast-layout">
-          <div className="podcast-cover" role="img" aria-label="Portada del podcast Bogotá en bici, sobre dos ruedas"><div className="flex items-start justify-between"><span className="eyebrow">Bogotá en bici.</span><Headphones /></div><h3>LA CIUDAD,<br />SOBRE DOS<br />RUEDAS.</h3><small>CONVERSACIONES PARA EL CAMINO ↗</small></div>
-          <div><p className="eyebrow mb-4 text-primary"><Headphones size={15} />El podcast</p><h2 id="podcast-title" className="section-heading max-w-2xl">Cómo moverte en bicicleta<br className="hidden lg:block" /> en medio del tráfico<span className="text-primary">.</span></h2><p className="mt-4 max-w-xl text-sm leading-7 text-dark-muted">Hablamos de los puntos ciegos, los cruces y los hábitos que puedes aplicar desde tu próximo recorrido.</p><PodcastPlayer /></div>
+          <div className="podcast-cover" aria-hidden="true"><div className="flex items-start justify-between"><span className="eyebrow">El podcast</span><Headphones /></div><p>{episode.show}</p></div>
+          <div><p className="eyebrow mb-4 text-primary"><Headphones size={15} />{episode.show}</p><h2 id="podcast-title" className="section-heading max-w-2xl">{episode.title}</h2><PodcastPlayer /></div>
         </div></section>
         <section className="closing"><div className="page-width flex flex-wrap items-center justify-between gap-6"><div><p className="eyebrow mb-3 text-muted-foreground">Nos vemos en la vía</p><h2 className="section-heading">Prepara tu próximo recorrido<span className="text-highlight">.</span></h2></div><Button asChild variant="campaign" size="lg"><a href="#consejos">Volver a los consejos<ArrowRight /></a></Button></div></section>
       </main>

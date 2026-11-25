@@ -18,7 +18,10 @@ export function PodcastPlayer() {
   const available = source?.kind === "mp3" && !failed;
 
   return <div className="player-shell">
-    {source?.kind === "spotify" ? <iframe title="Episodio de Bogotá en bici en Spotify" src={source.url} width="100%" height="152" allow="encrypted-media; fullscreen; picture-in-picture" loading="lazy" className="rounded-md border-0" /> : <>
+    {source?.kind === "spotify" && episode.source ? <>
+      <iframe title={`${episode.title} · ${episode.show} en Spotify`} src={source.url} width="100%" height="152" allow="encrypted-media; fullscreen; picture-in-picture" loading="lazy" className="rounded-md border-0" />
+      <a className="mt-3 inline-block text-sm font-semibold text-primary underline underline-offset-4" href={episode.source.url}>Abrir en Spotify</a>
+    </> : <>
       {available && <audio ref={audio} src={source.url} preload="metadata" onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)} onEnded={() => setPlaying(false)} onError={() => { setFailed(true); setPlaying(false); }} onTimeUpdate={() => setTime(audio.current?.currentTime ?? 0)} onLoadedMetadata={() => setDuration(Number.isFinite(audio.current?.duration) ? audio.current?.duration ?? 0 : 0)} />}
       {!available && <p className="mb-4 flex items-center gap-2 text-sm text-dark-muted"><Headphones size={16} />Episodio disponible próximamente</p>}
       <div className="flex items-center gap-4">
